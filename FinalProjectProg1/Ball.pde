@@ -16,7 +16,7 @@ class Ball{
   
   void update(){
     vel.add(acc); //ball falls faster after some time
-    pos.add(acc); //up and down
+    pos.add(vel); //up and down
     
     //ball will stop falling on the Ground
     if (pos.y >= groundY - radius){
@@ -35,7 +35,7 @@ class Ball{
    //you can jump only if you stand on Ground
    void jump(){
      if(onGround){
-       vel.y = -12;
+       vel.y = -17;
        onGround = false;
      }
    }
