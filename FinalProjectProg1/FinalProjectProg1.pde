@@ -47,6 +47,12 @@ void draw(){
   topBlock.display();
   bottomBlock.display();
   
+  //when the ball touch the blocks the screen will go red to show that the player lost
+  if(gameOver){
+    fill(255, 0, 0, 80);
+    rect(0, 0, width, height);
+  }
+  
 }
 
 void keyPressed(){
