@@ -34,6 +34,7 @@ class Block{
       
       //reset again
       if(isTop){
+        pos.y = 0;
       }else{
         pos.y = groundY - h;
       }
