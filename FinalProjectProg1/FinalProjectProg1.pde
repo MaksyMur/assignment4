@@ -57,14 +57,23 @@ void draw(){
 
 void keyPressed(){
   if(key == ' '){
-    if(!gameStarted){
-      gameStarted = true; //the blocks will start moving once you preesed the space key
+    
+    //if game is over - restart
+    if(gameOver){
+      resetGame();
+      return;
     }
-    if(!gameOver){
+    
+    //the game will start on first space press
+    if(!gameStarted){
+      gameStarted = true;
+    }
+    
+    //if(!gameOver){
     ball.jump();
     }
   }
-}
+
 
 //Checking if the ball touch the blocks
   boolean hitBlock(Ball ball,  Block block){
@@ -82,4 +91,19 @@ void keyPressed(){
       ballLeft < blockRight &&
       ballBottom > blockTop &&
       ballTop < blockBottom);
+      }
+      
+      //I want to reset objects after you press space
+      void resetGame(){
+        gameStarted = false;
+        gameOver = false;
+        
+        //reset ball
+        ball.pos.y = groundY - ball.radius;
+        ball.vel.y = 0;
+        ball.onGround = true;
+        
+        //reset blocks
+        topBlock.pos.x = 400;
+        bottomBlock.pos.x = 600;
       }
