@@ -1,7 +1,6 @@
 Ball ball;
 
-Block topBlock;
-Block bottomBlock;
+Block[] blocks = new Block[2];
 
 float groundY = 360;
 
@@ -15,9 +14,9 @@ size(400, 400);
 
 ball = new Ball(60, groundY - 20);
 
-topBlock = new Block(400, true);
-bottomBlock = new Block(600, false);
 
+blocks[0] = new Block(400, true);
+blocks[1] = new Block(600, false);
 
 }
 
@@ -34,28 +33,35 @@ void draw(){
     //update objects only when the game s running
     if(gameStarted && !gameOver){
       ball.update();
-      topBlock.update();
-      bottomBlock.update();
       
+      for(int i = 0; i < blocks.length; i++){
+        blocks[i].update();
+      }
       
       
       //score from bottom block
-      if(!bottomBlock.scored && bottomBlock.pos.x + bottomBlock.w 
+      Block bottom = blocks[1];
+      
+      if(!bottom.scored && bottom.pos.x + bottom.w 
       < ball.pos.x - ball.radius){
         score++;
-        bottomBlock.scored = true;
+        bottom.scored = true;
       }
       
       
       //if the ball touch the blocks = you lose
-      if(hitBlock(ball, topBlock) || hitBlock(ball, bottomBlock)){
-        gameOver = true;
+      for(int i = 0; i < blocks.length; i++){
+        if(hitBlock(ball, blocks[i])){
+          gameOver = true;
+        }
       }
     }
   
   ball.display();
-  topBlock.display();
-  bottomBlock.display();
+  for(int i = 0; i < blocks.length; i++){
+        blocks[i].display();
+  }
+  
   
   //score on the top
       fill(255);
@@ -72,7 +78,7 @@ void draw(){
     rect(0, 0, width, height);
   }
   
-}
+      }
 
 void keyPressed(){
   if(key == ' '){
@@ -124,8 +130,8 @@ void keyPressed(){
         ball.onGround = true;
         
         //reset blocks
-        topBlock.pos.x = 400;
-        topBlock.scored = false;
-        bottomBlock.pos.x = 600;
-        bottomBlock.scored = false;
+        blocks[0].pos.x = 400;
+        blocks[0].scored = false;
+        blocks[1].pos.x = 600;
+        blocks[1].scored = false;
       }
