@@ -8,6 +8,8 @@ float groundY = 360;
 boolean gameStarted = false;
 boolean gameOver = false;
 
+int score = 0;
+
 void setup(){
 size(400, 400);  
 
@@ -15,6 +17,8 @@ ball = new Ball(60, groundY - 20);
 
 topBlock = new Block(400, true);
 bottomBlock = new Block(600, false);
+
+
 }
 
 void draw(){
@@ -25,17 +29,23 @@ void draw(){
   fill(#204988); //colour for Ground
   rect(0, 360, 400, 40);
   
-  //before first space pressed the blocks stay still
-    //if(gameStarted){
-    //  topBlock.update();
-    //  bottomBlock.update();
-    //}
+  
     
     //update objects only when the game s running
     if(gameStarted && !gameOver){
       ball.update();
       topBlock.update();
       bottomBlock.update();
+      
+      
+      
+      //score from bottom block
+      if(!bottomBlock.scored && bottomBlock.pos.x + bottomBlock.w 
+      < ball.pos.x - ball.radius){
+        score++;
+        bottomBlock.scored = true;
+      }
+      
       
       //if the ball touch the blocks = you lose
       if(hitBlock(ball, topBlock) || hitBlock(ball, bottomBlock)){
@@ -46,6 +56,15 @@ void draw(){
   ball.display();
   topBlock.display();
   bottomBlock.display();
+  
+  //score on the top
+      fill(255);
+      ellipse(50, 25, 70, 35);
+      
+      fill(#007CA5);
+      textAlign(CENTER, CENTER);
+      textSize(24);
+      text(score, 50, 23);
   
   //when the ball touch the blocks the screen will go red to show that the player lost
   if(gameOver){
@@ -97,6 +116,7 @@ void keyPressed(){
       void resetGame(){
         gameStarted = false;
         gameOver = false;
+        score = 0;
         
         //reset ball
         ball.pos.y = groundY - ball.radius;
@@ -105,5 +125,7 @@ void keyPressed(){
         
         //reset blocks
         topBlock.pos.x = 400;
+        topBlock.scored = false;
         bottomBlock.pos.x = 600;
+        bottomBlock.scored = false;
       }

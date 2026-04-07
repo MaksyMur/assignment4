@@ -9,6 +9,8 @@ class Block{
   
   boolean isTop;
   
+  boolean scored = false;
+  
   //starting position
   Block(float x, boolean isTopBlock){
     pos = new PVector(x, 0);
@@ -31,6 +33,7 @@ class Block{
     //if off screen then reset to right
     if(pos.x + w < 0){
       pos.x = width + 100;
+      scored = false; //when block repeatds it will give the point to the score again
       
       //reset again
       if(isTop){
