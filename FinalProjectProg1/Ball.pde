@@ -35,7 +35,7 @@ class Ball{
    //you can jump only if you stand on Ground
    void jump(){
      if(onGround){
-       vel.y = -17;
+       vel.y = -16;
        onGround = false;
      }
    }

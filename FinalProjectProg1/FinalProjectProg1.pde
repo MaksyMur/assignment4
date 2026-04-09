@@ -25,11 +25,7 @@ void draw(){
   fill(#204988); //colour for Ground
   rect(0, 360, 400, 40);
   
-  //before first space pressed the blocks stay still
-    //if(gameStarted){
-    //  topBlock.update();
-    //  bottomBlock.update();
-    //}
+ 
     
     //update objects only when the game s running
     if(gameStarted && !gameOver){
