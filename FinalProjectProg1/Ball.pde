@@ -32,7 +32,7 @@ class Ball{
     ellipse(pos.x, pos.y, radius * 2, radius *2);
    }
    
-   //you can jump only if you stand on Ground
+   //I want the player to jump only if you stand on Ground
    void jump(){
      if(onGround){
        vel.y = -17;

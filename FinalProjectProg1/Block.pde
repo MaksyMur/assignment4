@@ -28,7 +28,7 @@ class Block{
   void update(){
     pos.add(vel);
     
-    //if off screen then reset to right
+    //if the blocks off screen then to reset to right
     if(pos.x + w < 0){
       pos.x = width + 100;
       
